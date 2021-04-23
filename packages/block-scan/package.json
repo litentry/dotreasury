@@ -6,7 +6,8 @@
     "node": ">=15.0.0"
   },
   "scripts": {
-    "prod": "pm2 start ecosystem.config.js --env production"
+    "prod": "pm2 start ecosystem.config.js --env production",
+    "serve": "nodemon --watch \"src/**/*\" -e \"js,ts\" --exec \"ts-node src/index.js\""
   },
   "dependencies": {
     "@polkadot/api": "^4.6.2",
@@ -16,6 +17,7 @@
     "mongodb": "^3.6.3"
   },
   "devDependencies": {
-    "pm2": "^4.5.1"
+    "pm2": "^4.5.1",
+    "nodemon": "^2.0.7"
   }
 }

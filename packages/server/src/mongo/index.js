@@ -42,6 +42,7 @@ let othersIncomeCol = null;
 let statsCol = null;
 
 async function initDb() {
+  console.log(mongoUrl);
   client = await MongoClient.connect(mongoUrl, {
     useUnifiedTopology: true,
   });
