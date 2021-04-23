@@ -17,6 +17,7 @@ import TableNoDataCell from "../../components/TableNoDataCell";
 import RelatedLInks from "../../components/RelatedLinks";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../../store/reducers/chainSlice";
+import { valueFromSymbolToUsdt } from "../../utils";
 
 const Wrapper = styled.div`
   overflow-x: scroll;
@@ -111,7 +112,23 @@ const ProposalsTable = ({ data, loading }) => {
                     <RelatedLInks links={item.links} />
                   </Table.Cell>
                   <Table.Cell textAlign={"right"}>
-                    <Balance value={item.value} currency={symbol} />
+                    {item.symbolPrice ? (
+                      <PairTextVertical
+                        value={<Balance value={item.value} currency={symbol} />}
+                        detail={
+                          <Balance
+                            value={valueFromSymbolToUsdt(
+                              item.value || 0,
+                              symbol,
+                              item.symbolPrice
+                            )}
+                            currency={"USDT"}
+                          />
+                        }
+                      />
+                    ) : (
+                      <Balance value={item.value} currency={symbol} />
+                    )}
                   </Table.Cell>
                   <Table.Cell className="status-cell" textAlign={"right"}>
                     <PairTextVertical

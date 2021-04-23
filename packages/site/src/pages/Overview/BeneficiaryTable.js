@@ -11,12 +11,11 @@ import { overviewSelector } from "../../store/reducers/overviewSlice";
 
 const Wrapper = styled.div`
   overflow: hidden;
-`
+`;
 
 const TableWrapper = styled.div`
   overflow: scroll;
-`
-
+`;
 
 const Title = styled(Text)`
   font-size: 18px;
@@ -41,7 +40,9 @@ const BeneficiaryTable = () => {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Beneficiary</Table.HeaderCell>
-              <Table.HeaderCell textAlign={"right"}>Total value</Table.HeaderCell>
+              <Table.HeaderCell textAlign={"right"}>
+                Total value
+              </Table.HeaderCell>
               <Table.HeaderCell textAlign={"right"}>
                 Proposal count
               </Table.HeaderCell>
@@ -55,7 +56,7 @@ const BeneficiaryTable = () => {
                     <User address={item.beneficiary} />
                   </Table.Cell>
                   <Table.Cell textAlign={"right"}>
-                    <Balance value={item.value} />
+                    <Balance value={item.value} currency={"USDT"} />
                   </Table.Cell>
                   <Table.Cell textAlign={"right"}>
                     <Text>{item.count}</Text>

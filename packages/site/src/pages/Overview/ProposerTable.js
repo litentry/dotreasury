@@ -11,11 +11,11 @@ import { overviewSelector } from "../../store/reducers/overviewSlice";
 
 const Wrapper = styled.div`
   overflow: hidden;
-`
+`;
 
 const TableWrapper = styled.div`
   overflow: scroll;
-`
+`;
 
 const Title = styled(Text)`
   font-size: 18px;
@@ -35,13 +35,15 @@ const ProposerTable = () => {
   return (
     <Wrapper>
       <Title>Top Tip Finders</Title>
-        <TableWrapper>
+      <TableWrapper>
         <Table striped selectable unstackable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Finder</Table.HeaderCell>
               <Table.HeaderCell textAlign={"right"}>Count</Table.HeaderCell>
-              <Table.HeaderCell textAlign={"right"}>Total value</Table.HeaderCell>
+              <Table.HeaderCell textAlign={"right"}>
+                Total value
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -55,7 +57,7 @@ const ProposerTable = () => {
                     <Text>{item.count}</Text>
                   </Table.Cell>
                   <Table.Cell textAlign={"right"}>
-                    <Balance value={item.value} />
+                    <Balance value={item.value} currency={"USDT"} />
                   </Table.Cell>
                 </TableRow>
               ))

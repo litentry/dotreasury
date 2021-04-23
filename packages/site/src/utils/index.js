@@ -177,3 +177,10 @@ export function symbolFromNetwork(network) {
     return null;
   }
 }
+
+export function valueFromSymbolToUsdt(value, symbol, price) {
+  return new BigNumber(value)
+    .div(Math.pow(10, getPrecision(symbol)))
+    .times(price)
+    .toString();
+}

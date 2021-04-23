@@ -16,6 +16,7 @@ import TableNoDataCell from "../../components/TableNoDataCell";
 import ReasonLink from "./ReasonLink";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../../store/reducers/chainSlice";
+import { valueFromSymbolToUsdt } from "../../utils";
 
 const Wrapper = styled.div`
   overflow-x: scroll;
@@ -91,6 +92,22 @@ const TipsTable = ({ data, loading }) => {
                   <Table.Cell className="balance-cell" textAlign={"right"}>
                     {item.showStatus === TipStatus.Retracted ? (
                       "--"
+                    ) : item.symbolPrice ? (
+                      <PairTextVertical
+                        value={
+                          <Balance value={item.medianValue} currency={symbol} />
+                        }
+                        detail={
+                          <Balance
+                            value={valueFromSymbolToUsdt(
+                              item.medianValue || 0,
+                              symbol,
+                              item.symbolPrice
+                            )}
+                            currency={"USDT"}
+                          />
+                        }
+                      />
                     ) : (
                       <Balance value={item.medianValue} currency={symbol} />
                     )}

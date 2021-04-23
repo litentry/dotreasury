@@ -15,6 +15,8 @@ import PolygonLabel from "../../components/PolygonLabel";
 import ExplorerLink from "../../components/ExplorerLink";
 import { useSelector } from "react-redux";
 import { chainSymbolSelector } from "../../store/reducers/chainSlice";
+import { valueFromSymbolToUsdt } from "../../utils";
+import PairTextVertical from "../../components/PairTextVertical";
 
 const Wrapper = styled.div`
   overflow-x: scroll;
@@ -123,7 +125,23 @@ const BountiesTable = ({ data, loading }) => {
                     <Text>{item.title}</Text>
                   </Table.Cell>
                   <Table.Cell className="balance-cell" textAlign={"right"}>
-                    <Balance value={item.value} currency={symbol} />
+                    {item.symbolPrice ? (
+                      <PairTextVertical
+                        value={<Balance value={item.value} currency={symbol} />}
+                        detail={
+                          <Balance
+                            value={valueFromSymbolToUsdt(
+                              item.value || 0,
+                              symbol,
+                              item.symbolPrice
+                            )}
+                            currency={"USDT"}
+                          />
+                        }
+                      />
+                    ) : (
+                      <Balance value={item.value} currency={symbol} />
+                    )}
                   </Table.Cell>
                   <Table.Cell textAlign={"right"}>
                     <CapText>{item.latestState?.state}</CapText>
