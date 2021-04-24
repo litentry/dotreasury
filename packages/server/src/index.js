@@ -4,11 +4,12 @@ const logger = require("koa-logger");
 const helmet = require("koa-helmet");
 const http = require("http");
 const cors = require("@koa/cors");
+
+require("dotenv").config();
+
 const config = require("../config");
 const { initDb } = require("./mongo");
 const { listenAndEmitInfo } = require("./websocket");
-
-require("dotenv").config();
 
 const app = new Koa();
 
