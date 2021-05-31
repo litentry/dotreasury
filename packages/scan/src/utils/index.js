@@ -129,6 +129,10 @@ async function getTreasuryBalance(blockHash, blockHeight) {
   if ("polkadot" === currentChain()) {
     // TODO: We can not get treasury balance at height which <= 29230.
     // TODO: Though we do not store the balance in this range, we should figure out how to query it.
+    if (blockHeight <= 29230) {
+      return 0;
+    }
+
     return await queryAccountFreeWithSystem(blockHash);
   }
 
@@ -153,7 +157,8 @@ async function getTreasuryBalance(blockHash, blockHeight) {
     return metadata.registry.createType("Compact<Balance>", value).toJSON();
   } else if (blockHeight < ksmMigrateAccountHeight) {
     // TODO: find how to get the balance from 1377831 to 1492896
-    return await queryAccountFreeWithSystem(blockHash);
+    return null;
+    // return await queryAccountFreeWithSystem(blockHash);
   } else {
     return await queryAccountFreeWithSystem(blockHash);
   }
