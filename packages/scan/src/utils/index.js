@@ -129,7 +129,10 @@ async function getTreasuryBalance(blockHash, blockHeight) {
   if ("polkadot" === currentChain()) {
     // TODO: We can not get treasury balance at height which <= 29230.
     // TODO: Though we do not store the balance in this range, we should figure out how to query it.
-    if (blockHeight <= 29230) {
+    // TODO: scanning 29231 doesn't work either, it complains about too small websocket frame size,
+    //       see https://github.com/subquery/subql/issues/77
+    //       starting from 29232 seems to work though
+    if (blockHeight <= 29231) {
       return 0;
     }
 
