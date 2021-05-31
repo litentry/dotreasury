@@ -33,7 +33,13 @@ async function scanKnowBlocks(toScanHeight) {
 async function main() {
   await updateHeight();
   let scanHeight = await getNextScanHeight();
+
+  if (!!process.env.STARTING_HEIGHT) {
+    scanHeight = parseInt(process.env.STARTING_HEIGHT);
+  }
   await deleteDataFrom(scanHeight);
+
+  logger.info("start scanning from block " + scanHeight);
 
   const chain = currentChain();
   const useKnowHeights =
